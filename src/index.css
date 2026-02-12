@@ -1,0 +1,20 @@
+:root {
+  --primary: #00A6A6; /* Soft Teal */
+  --secondary: #F49F1C; /* Warm Orange */
+  --bg-color: #F8F9FA;
+  --text-color: #333333;
+  --font-family: 'Outfit', sans-serif;
+  
+  /* Prestige Levels */
+  --prestige-bronze: #CD7F32;
+  --prestige-silver: #C0C0C0;
+  --prestige-gold: #FFD700;
+  --prestige-platinum: #E5E4E2;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}

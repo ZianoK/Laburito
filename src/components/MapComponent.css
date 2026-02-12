@@ -1,0 +1,26 @@
+.map-wrapper {
+    height: 400px;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+    z-index: 1;
+    position: relative;
+    isolation: isolate;
+}
+
+/* Hide Leaflet attribution */
+.leaflet-control-attribution {
+    display: none !important;
+}
+
+.leaflet-map {
+    height: 100%;
+    width: 100%;
+}
+
+.map-popup {
+    font-family: var(--font-family);
+    font-size: 0.9rem;
+}

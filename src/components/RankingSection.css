@@ -1,0 +1,101 @@
+.ranking-section {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 24px;
+}
+
+.ranking-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    color: var(--primary);
+}
+
+.award-icon {
+    width: 28px;
+    height: 28px;
+}
+
+.ranking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ranking-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    transition: transform 0.2s;
+}
+
+.ranking-item:hover {
+    transform: translateX(4px);
+    background-color: #f0f2f5;
+}
+
+.rank-number {
+    font-size: 1.2rem;
+    font-weight: 800;
+    width: 30px;
+    text-align: center;
+    color: #ccc;
+}
+
+.rank-1 {
+    color: #FFD700;
+}
+
+.rank-2 {
+    color: #C0C0C0;
+}
+
+.rank-3 {
+    color: #CD7F32;
+}
+
+.rank-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.rank-info {
+    flex: 1;
+}
+
+.rank-info h4 {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.rank-info p {
+    margin: 4px 0;
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: capitalize;
+}
+
+.rank-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.rank-badge {
+    background: var(--secondary);
+    color: white;
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: 700;
+}
