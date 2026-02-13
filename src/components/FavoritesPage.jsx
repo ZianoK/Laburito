@@ -1,9 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import FilterBar from './FilterBar';
 import ServiceCard from './ServiceCard';
+import { useFavorites } from '../features/favorites/favorites.hooks';
 import './FavoritesPage.css';
 
-const FavoritesPage = ({ favorites, services, onToggleFavorite, onHire }) => {
+const FavoritesPage = ({ services, onHire, onAddToCart }) => {
+    const { data: favorites = [] } = useFavorites();
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [sortBy, setSortBy] = useState('rating');
 
@@ -51,9 +53,8 @@ const FavoritesPage = ({ favorites, services, onToggleFavorite, onHire }) => {
                         <ServiceCard
                             key={service.id}
                             service={service}
-                            isFavorite={true}
-                            onToggleFavorite={onToggleFavorite}
                             onHire={onHire}
+                            onAddToCart={onAddToCart}
                         />
                     ))
                 ) : (

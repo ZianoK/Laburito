@@ -1,8 +1,16 @@
 import React from 'react';
-import { Calendar, CheckCircle, RotateCcw } from 'lucide-react';
+import { RotateCcw } from 'lucide-react';
+import { useBookings } from '../features/bookings/bookings.hooks';
+import { BOOKING_STATUS } from '../features/bookings/bookings.schemas';
 
-const ServiceHistory = ({ orders, onNavigate }) => {
-    const historyOrders = orders.filter(o => o.status === 'completed');
+const ServiceHistory = ({ onNavigate }) => {
+    const { data: bookings = [] } = useBookings();
+
+    // Filter for history (Completed or Cancelled)
+    const historyOrders = bookings.filter(b =>
+        b.status === BOOKING_STATUS.COMPLETED ||
+        b.status === BOOKING_STATUS.CANCELLED
+    );
 
     const containerStyle = {
         padding: '20px',
@@ -41,17 +49,17 @@ const ServiceHistory = ({ orders, onNavigate }) => {
                 <div key={order.id} style={cardStyle}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                         <img
-                            src={order.service.image}
-                            alt={order.service.name}
+                            src={order.serviceImage}
+                            alt={order.serviceName}
                             style={{ width: '50px', height: '50px', borderRadius: '50%', objectFit: 'cover', filter: 'grayscale(0.5)' }}
                         />
                         <div>
-                            <h3 style={{ margin: 0, color: '#333' }}>{order.service.serviceTitle}</h3>
+                            <h3 style={{ margin: 0, color: '#333' }}>{order.serviceTitle || order.serviceName}</h3>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
-                                <span style={{ color: '#666', fontSize: '0.9rem' }}>{order.service.name}</span>
+                                <span style={{ color: '#666', fontSize: '0.9rem' }}>{order.serviceName}</span>
                                 <span style={{ color: '#ccc' }}>•</span>
                                 <span style={{ fontSize: '0.85rem', color: '#999' }}>
-                                    Finalizado el {new Date(order.completedDate).toLocaleDateString()}
+                                    {order.status === BOOKING_STATUS.CANCELLED ? 'Cancelado' : 'Finalizado'}
                                 </span>
                             </div>
                         </div>
@@ -59,7 +67,7 @@ const ServiceHistory = ({ orders, onNavigate }) => {
 
                     <div style={{ textAlign: 'right' }}>
                         <div style={{ fontSize: '1.2rem', fontWeight: '700', color: '#333' }}>
-                            ${order.price.toLocaleString()}
+                            ${(order.totalAmount || order.price || 0).toLocaleString()}
                         </div>
                         <button
                             onClick={() => onNavigate('home')} // Simplified re-hire

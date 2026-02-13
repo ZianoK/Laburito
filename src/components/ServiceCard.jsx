@@ -1,11 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Heart, Star, MapPin, MessageCircle, Phone, Mail, UserCheck, ShoppingCart } from 'lucide-react';
 import { PRESTIGE_LEVELS } from '../data/mockData';
+import { useFavorites, useToggleFavorite } from '../features/favorites/favorites.hooks';
 import './ServiceCard.css';
 
-const ServiceCard = ({ service, isFavorite, onToggleFavorite, onHire, onAddToCart, isInCart }) => {
+const ServiceCard = ({ service, onHire, onAddToCart, isInCart }) => {
     const prestige = PRESTIGE_LEVELS[service.prestige] || PRESTIGE_LEVELS.BRONZE;
     const [showContact, setShowContact] = useState(false);
+
+    // Favorites Logic
+    const { data: favorites = [] } = useFavorites();
+    const { mutate: toggleFavorite } = useToggleFavorite();
+    const isFavorite = favorites.includes(service.id);
+
     const cardRef = useRef(null);
 
     useEffect(() => {
@@ -26,7 +33,7 @@ const ServiceCard = ({ service, isFavorite, onToggleFavorite, onHire, onAddToCar
                     className={`favorite-btn ${isFavorite ? 'active' : ''}`}
                     onClick={(e) => {
                         e.stopPropagation();
-                        onToggleFavorite(service.id);
+                        toggleFavorite(service.id);
                     }}
                 >
                     <Heart size={20} fill={isFavorite ? "currentColor" : "none"} />

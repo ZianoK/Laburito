@@ -83,11 +83,17 @@ const Header = ({ searchTerm, setSearchTerm, onNavigate, user, onLogout, cartCou
                                     <span className="user-email">{user.email}</span>
                                 </div>
                                 <div className="dropdown-divider"></div>
+                                <button className="dropdown-item" onClick={() => handleNavigate('profile')}>
+                                    👤 Mi Perfil
+                                </button>
                                 <button className="dropdown-item" onClick={() => handleNavigate('active-services')}>
                                     🛠️ Servicios Activos
                                 </button>
                                 <button className="dropdown-item" onClick={() => handleNavigate('favorites')}>
                                     ❤️ Favoritos
+                                </button>
+                                <button className="dropdown-item" onClick={() => handleNavigate('requests')}>
+                                    📬 Solicitudes
                                 </button>
                                 <button className="dropdown-item" onClick={() => handleNavigate('history')}>
                                     📅 Historial

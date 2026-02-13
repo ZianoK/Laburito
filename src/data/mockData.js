@@ -29,6 +29,7 @@ export const MOCK_SERVICES = [
         image: "https://images.unsplash.com/photo-1581578014828-160fa1185011?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
         jobsCompleted: 350,
         contact: { phone: "11-1234-5678", email: "mario.plomeria@email.com", whatsapp: "5491112345678" },
+        sellerId: 'u2', // Linked to Mario Plomero
         paymentMethods: ["Efectivo", "Transferencia", "Mercado Pago"],
         discounts: { "Efectivo": 0.10 },
         serviceTypes: [
@@ -51,6 +52,7 @@ export const MOCK_SERVICES = [
         image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
         jobsCompleted: 210,
         contact: { phone: "11-8765-4321", email: "contacto@electrofast.com.ar", whatsapp: "5491187654321" },
+        sellerId: 'u3', // Linked to Servicios SA
         paymentMethods: ["Efectivo", "Tarjeta de Crédito", "Transferencia"],
         discounts: { "Transferencia": 0.05 },
         serviceTypes: [
