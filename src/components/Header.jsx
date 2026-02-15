@@ -69,7 +69,7 @@ const Header = ({ searchTerm, setSearchTerm, onNavigate, user, onLogout, cartCou
                         >
                             <span className="user-name">
                                 {user.name}
-                                {user.type === 'company' && <span className="badge-company">Empresa</span>}
+                                {user.roles && user.roles.includes('COMPANY') && <span className="badge-company">Empresa</span>}
                             </span>
                             <div className="avatar">
                                 <User size={18} />
@@ -80,26 +80,34 @@ const Header = ({ searchTerm, setSearchTerm, onNavigate, user, onLogout, cartCou
                             <div className="dropdown-menu">
                                 <div className="dropdown-header">
                                     <p>Hola, <strong>{user.name}</strong></p>
+
                                     <span className="user-email">{user.email}</span>
                                 </div>
                                 <div className="dropdown-divider"></div>
                                 <button className="dropdown-item" onClick={() => handleNavigate('profile')}>
                                     👤 Mi Perfil
                                 </button>
-                                <button className="dropdown-item" onClick={() => handleNavigate('active-services')}>
-                                    🛠️ Servicios Activos
-                                </button>
+
+                                {/* Client Only Link */}
+                                {(user.roles && user.roles.includes('CLIENT')) && (
+                                    <button className="dropdown-item" onClick={() => handleNavigate('my-bookings')}>
+                                        📦 Mis Contrataciones
+                                    </button>
+                                )}
+
                                 <button className="dropdown-item" onClick={() => handleNavigate('favorites')}>
                                     ❤️ Favoritos
                                 </button>
-                                <button className="dropdown-item" onClick={() => handleNavigate('requests')}>
-                                    📬 Solicitudes
-                                </button>
+
+                                {/* Provider Only Link */}
+                                {(user.roles && (user.roles.includes('SELLER') || user.roles.includes('COMPANY'))) && (
+                                    <button className="dropdown-item" onClick={() => handleNavigate('requests')}>
+                                        📬 Solicitudes
+                                    </button>
+                                )}
+
                                 <button className="dropdown-item" onClick={() => handleNavigate('history')}>
-                                    📅 Historial
-                                </button>
-                                <button className="dropdown-item" onClick={() => handleNavigate('config')}>
-                                    ⚙️ Configuración
+                                    📅 Historial (Servicios)
                                 </button>
                                 <div className="dropdown-divider"></div>
                                 <button className="dropdown-item logout" onClick={handleLogout}>
@@ -117,7 +125,7 @@ const Header = ({ searchTerm, setSearchTerm, onNavigate, user, onLogout, cartCou
                     </button>
                 )}
             </nav>
-        </header>
+        </header >
     );
 };
 

@@ -23,6 +23,7 @@ import IncomingRequests from './components/IncomingRequests';
 import ServiceHistory from './components/ServiceHistory';
 import ChatList from './components/ChatList';
 import UserProfile from './components/UserProfile';
+import MyBookings from './components/MyBookings';
 
 class ErrorBoundary extends React.Component {
     constructor(props) {
@@ -105,7 +106,7 @@ function LaburitoApp() {
 
     const handleBookingSuccess = (booking) => {
         setHiringService(null);
-        setView('active-services');
+        setView('my-bookings');
     };
 
 
@@ -161,8 +162,11 @@ function LaburitoApp() {
                         }}
                     />
                 );
+
             case 'profile':
                 return <UserProfile onNavigate={setView} />;
+            case 'my-bookings':
+                return <MyBookings onNavigate={setView} />;
             case 'favorites':
                 return (
                     <FavoritesPage
