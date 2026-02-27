@@ -3,14 +3,18 @@ import { useBookings, useUpdateBookingStatus } from '../features/bookings/bookin
 import { BOOKING_STATUS } from '../features/bookings/bookings.schemas';
 import { Calendar, Clock, DollarSign, XCircle, AlertCircle } from 'lucide-react';
 
+import { useCurrentUser } from '../features/auth/useCurrentUser';
+
 const MyBookings = ({ onNavigate }) => {
-    const { data: bookings = [], isLoading } = useBookings();
+    const { user } = useCurrentUser();
+    const { data: allBookings = [], isLoading } = useBookings();
     const { mutate: updateStatus } = useUpdateBookingStatus();
     const [activeTab, setActiveTab] = useState('pending');
 
     if (isLoading) return <div className="p-8 text-center">Cargando contrataciones...</div>;
 
-    // Filter Logic
+    // Filter Logic - explictly enforce matching clientId
+    const bookings = allBookings.filter(b => b.clientId === user?.id);
     const pending = bookings.filter(b => b.status === BOOKING_STATUS.PENDING_CONFIRMATION);
     const active = bookings.filter(b => b.status === BOOKING_STATUS.CONFIRMED || b.status === BOOKING_STATUS.IN_PROGRESS);
     const history = bookings.filter(b => b.status === BOOKING_STATUS.COMPLETED || b.status === BOOKING_STATUS.CANCELLED);
@@ -58,7 +62,7 @@ const MyBookings = ({ onNavigate }) => {
             </div>
 
             {/* Actions */}
-            {(booking.status === BOOKING_STATUS.PENDING_CONFIRMATION || booking.status === BOOKING_STATUS.CONFIRMED) && (
+            {(booking.status === BOOKING_STATUS.PENDING_CONFIRMATION || booking.status === BOOKING_STATUS.CONFIRMED) && booking.clientId === user?.id && (
                 <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end' }}>
                     <button
                         onClick={() => handleCancel(booking.id)}

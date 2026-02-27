@@ -26,7 +26,7 @@ export const bookingsApi = {
 
     getByClientId: async (clientId) => {
         await delay(500);
-        const all = storage.get(STORAGE_KEY, STORAGE_VERSION, bookingsListSchema, migrateBookings) || [];
+        const all = storage.get(STORAGE_KEY, STORAGE_VERSION, bookingsListSchema, migrateBookings, LEGACY_KEY) || [];
         return all.filter(b => b.clientId === clientId);
     },
 
